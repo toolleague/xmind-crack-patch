@@ -55,3 +55,37 @@ npm install -g asar
    ```
 
 4. 使用上一步生成的 app.asar 文件替换 Xmind 安装路径中的 resources 文件夹中的 app.asar 文件即可。
+
+
+## Archlinux
+Arch Linux 不支持 `dpkg`，因为它是 Debian/Ubuntu 系的包管理工具，而 Arch Linux 使用的是 `pacman` 和 `yay`（AUR 助手）。要在 Arch Linux 上安装 XMind，可以按照以下步骤操作：
+
+### 1. **使用 AUR (推荐)**
+XMind 已经在 AUR（Arch User Repository）中，你可以使用 `yay` 或 `paru` 安装：
+```bash
+yay -S xmind
+```
+或者：
+```bash
+paru -S xmind
+```
+如果没有 `yay`，你可以先安装：
+```bash
+sudo pacman -S yay
+```
+
+---
+
+### 2. **手动安装 .deb 文件（不推荐）**
+如果一定要安装 `.deb` 包，需要手动解压并解决依赖：
+```bash
+mkdir xmind && dpkg-deb -x Xmind-for-Linux-amd64bit-23.08.02122-202308281754.deb xmind
+sudo cp -r xmind/* /
+```
+然后手动安装缺失的依赖：
+```bash
+sudo pacman -S gtk3 nss libxss libxtst xdg-utils at-spi2-core util-linux libsecret
+```
+但这样做可能会导致兼容性问题，因此建议使用 AUR。
+
+你可以试试 `yay -S xmind`，看看能否顺利安装。
